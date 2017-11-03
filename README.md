@@ -9,24 +9,24 @@ The product will:
 3. Serve as a repository for study and test-preparation material, such as previous test papers, question lists, etc.
  
 Admin Login:
-Username : admin__
+Username : admin 
 Password : pass@123
 
 Test User Login:
-Username : miloni-joshi __
+Username : miloni-joshi 
 Password : pass@123
 
 Steps after cloning this repository:
 
-//Create a virtual environment and install dependencies.  __
-mkvirtualenv this_project __
-pip install -r requirements.txt __
+//Create a virtual environment and install dependencies. 
+mkvirtualenv this_project
+pip install -r requirements.txt
 
-//Initialise database after configuring it. __
-python ./manage.py syncdb __
-python ./manage.py migrate __
+//Initialise database after configuring it.
+python ./manage.py syncdb 
+python ./manage.py migrate 
 
-//Run the development server. __
-python ./manage.py runserver __
+//Run the development server.
+python ./manage.py runserver
 
 
