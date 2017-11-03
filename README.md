@@ -9,7 +9,7 @@ The product will:
 3. Serve as a repository for study and test-preparation material, such as previous test papers, question lists, etc.
  
 Admin Login:
-Username : admin __
+Username : admin__
 Password : pass@123
 
 Test User Login:
