@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+{% load staticfiles %}
+<body>
+
+
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+
+
+            <!-- *** TOP END *** -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on $$$$$$$$$$$ or ########</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                         <div class="login">
+                                <a href="/store/login-register/"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Register/Login</span></a>
+                         </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                         <div class="navbar-collapse collapse" id="navigation">
+
+                             <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="/">HOME </a>
+                                </li>
+                               <li>
+                                    <a href="/features" class="dropdown-toggle" data-toggle="dropdown">FEATURES <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/features/#books">BOOKS AND EQUIPMENTS</a>
+                                        </li>
+                                        <li><a href="/features/#testpapers">TEST PAPERS</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/faq" class="dropdown-toggle active" >FAQ</a>
+                                </li>
+                                <li class="dropdown active">
+                                    <a href="/contact" class="dropdown-toggle" >CONTACT US</a>
+                                </li>
+                                <li>
+                                    <a href="/team" class="dropdown-toggle" >OUR TEAM</a>
+                                </li>
+
+                                <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Contact</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Home</a>
+                            </li>
+                            <li>Contact</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container" id="contact">
+
+                <section>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section>
+                                <div class="heading">
+                                    <h2>We are here to help you</h2>
+                                </div>
+
+                                <p class="lead">Are you curious about something? Do you have some kind of problem with our product? </p>
+                                <p>Please feel free to contact us, our customer service center is working for you 24/7.</p>
+                            </section>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="box-simple">
+                                <div class="icon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <h3>Address</h3>
+                                <p>DJ Sanghvi College of Engineering
+                                    <br>JVPD Scheme
+                                    <br>Mumbai, <strong>India</strong>
+                                </p>
+                            </div>
+                            <!-- /.box-simple -->
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <div class="box-simple">
+                                <div class="icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <h3>Call center</h3>
+                                <p class="text-muted">This number is toll free if calling from India, otherwise we advise you to use the electronic form of communication.</p>
+                                <p><strong>+91 980 000 0000</strong>
+                                </p>
+                            </div>
+                            <!-- /.box-simple -->
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="box-simple">
+                                <div class="icon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <h3>Electronic support</h3>
+                                <p class="text-muted">Please feel free to write an email to us.</p>
+                                    <strong><a href="mailto:">info@fakeemail.com</a></strong>
+                                                                   
+                            </div>
+                            <!-- /.box-simple -->
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+
+                    <div class="row text-center" style="background-color: #eeeeee;width:600px;margin-left:270px;">
+                        <div class="col-md-12">
+                            <div class="heading">
+                                <h2>Contact form</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <form id="formid" >
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="firstname">Firstname</label>
+                                            <input type="text" class="form-control" name="firstname" id="firstname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="lastname">Lastname</label>
+                                            <input type="text" class="form-control" name="lastname" id="lastname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="text" class="form-control" name="email" id="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="subject">Subject</label>
+                                            <input type="text" class="form-control" name="subject" id="subject">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="message">Message</label>
+                                            <textarea id="message" name="message" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 text-center" style="padding-bottom: 20px;">
+                                        <button type="button" id="buttonid" onclick="contact()" class="btn btn-template-main"><i class="fa fa-envelope-o"></i> Send message</button>
+
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </section>
+
+
+            </div>
+            <!-- /#contact.container -->
+        </div>
+        <!-- /#content -->
+
+        <!-- *** GET IT ***
+_________________________________________________________ -->
+
+
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+    <!-- #### JAVASCRIPT FILES ### -->
+
+
+    <!-- gmaps -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+
+    <script src="/static/js/gmaps.js"></script>
+    <script src="/static/js/gmaps.init.js"></script>
+
+    <!-- gmaps end -->
+
+<script type="text/javascript">
+function contact(){
+   emailjs.sendForm("gmail","contact","formid");
+   swal("You query has been passed succesfully")
+   // $(".btn-template-main").click(function(){  
+   //       $("#formid").submit();
+   //   });
+   var form = document.getElementById("formid");
+
+document.getElementById("buttonid").addEventListener("click", function () {
+  form.submit();
+});
+}
+</script>
+
+</body>
+
+</html>

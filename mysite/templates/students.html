@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% for student in students %}
+	<p>{{student.name}}</p>
+	{% if student.age > 30 %}
+		<p>{{student.age}}</p>
+	{% else %}	
+		<p>Age is less than 30</p>
+	{% endif %}	
+{% endfor %}
+</body>
+</html>

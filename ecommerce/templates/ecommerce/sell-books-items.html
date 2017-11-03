@@ -1,0 +1,114 @@
+{% load staticfiles %}
+
+
+{% for book in books %}
+<div class="col-md-4 col-sm-6">
+    <!-- Product Items go here -->
+    <div class="product">
+        <div class="image">
+            <div class="box-image">
+                <div class="image">
+                    {% if book.image %}
+                    <img src="{{ book.image.url }}" alt="" class="img-responsive">
+                    {% else %}
+                    <img src="/static/img/book1.jpg" alt="" class="img-responsive">
+                    {% endif %}
+                </div>
+                <div class="bg"></div>
+                <div class="name">
+                    <form method="post" action="/store/view-book-details/">
+                     <button type="submit" class="btn btn-template-transparent-primary"><h3>View Details</h3></button>
+                     <input type="hidden" name="book_id" value={{ book.id }}></input>
+               </form>
+                </div>
+                 <div class="text">
+                    <p class="buttons">
+
+                     <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+            <h3 style="margin-bottom:0px;"><a href="shop-detail.html">{{ book.title }}</a></h3>
+            <p class="price">&#x20b9;{{ book.max_price }}</p>
+                <a href="#" data-toggle="modal" data-target="#listing-modal" class="btn btn-template-main" role="button" onclick="set_modal_id('{{ book.id }}')"><i class="fa fa-plus-square"></i>Add Listing</a>
+        </div>
+        <!-- /.text -->
+    </div>
+</div>
+{% endfor %}
+
+ <!-- *** Listing MODAL ***
+_________________________________________________________ -->
+
+        <div class="modal fade" id="listing-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Login">Add Listing</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/store/add-new-listing/" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="price" id="selling_price" placeholder="Enter your Selling Price">
+                                <input type="hidden" name="item_id" id="modal_item_id"></input>
+                            </div>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" id="note" placeholder="Note"></textarea>
+                            </div>
+
+                            <p class="text-center">
+                                <button class="btn btn-template-main"><i class="fa fa-plus-square"></i>Submit Listing</button>
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!--<div class="pagination">
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page={{ books.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>-->
+<div class="pages">
+
+{% if books.has_other_pages %}
+                            <ul class="pagination">
+                            {% if books.has_previous %}
+                                 <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                 <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in books.paginator.page_range %}
+                            {% if books.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                            {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if books.has_next %}
+                            <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                            </ul>
+                        {% endif %}
+
+ </div>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<body>
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on ########## or ouremailid.com.</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="login">
+
+                                <a href="customer-register.html"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
+                                <!--redirect href on register-login-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Site logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active">
+                                    <a href="#" >Dashboard</a>
+                                </li>
+                                 <li>
+                                    <a href="buy-books.html" >Buy Items</a>
+                                </li>
+                                <li>
+                                    <a href="sell-books.html" >Sell Items</a>
+                                </li>
+                                <li>
+                                    <a href="#" >Test Papers</a>
+                                </li>
+                                <li>
+                                    <a href="#" >Discussion Forum</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Dashboard</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                	<div class="col-md-9 clearfix" id="checkout">
+
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">MY CART</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Seller Name</th>
+                                                    <th>Seller Contact</th>
+                                                    <th>Seller Email</th>
+                                                    <th>Status</th>
+                                                    <th>Customize Cart</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               {% for listing in new_listingscart %}
+                                                <tr>
+                                                    <td>
+                                                        {% if listing.item.image %}
+                                                        <img src="{{ listing.item.image.url }}" alt="" class="img-responsive">
+                                                        {% else %}
+                                                             <img src="/static/img/book1.jpg" alt="" class="img-responsive">
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ listing.item.title }}</td>
+                                                    <td>{{ listing.price }}</td>
+					                                <td>{{ listing.seller.first_name }} {{ listing.seller.last_name }}</td>
+                                                    <td>{{ listing.seller.tel_no}}</td>
+                                                    <td>{{ listing.seller.auth_user.email}}</td>
+
+                                                    <td>{{ listing.order.order_status }}</td>
+                                                    <td>
+                                                        <form id="formid" method="post" action="/store/place-order/">
+                                                            <button type="button" class="btn btn-template-main" id="buttonid" onclick="alert()">Checkout</button>
+                                                            <input type="hidden" name="listing_id" value="{{ listing.id }}"></input>
+
+                                                            <!--<input type="hidden" name="listing_selleremail" value="{{ listing.seller.email}}"></input>
+                                                            <input type="hidden" name="listing_item" value="{{ listing.item.title}}"></input>-->
+
+                                                        </form>
+
+                                                         <form method="post" action="/store/remove-from-cart/">
+                                                            <button type="submit" class="btn" style="color:#d06260;background-color:#ffffff !important;border-color:#d06260;">Remove</button>
+                                                            <input type="hidden" name="listing_id" value="{{ listing.id }}"></input>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">ORDER HISTORY</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Seller Name</th>
+                                                    <th>Seller Contact</th>
+                                                    <th>Seller Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for listing in new_listingsorder %}
+                                                <tr>
+                                                    <td>
+                                                        {% if listing.item.image %}
+                                                        <img src="{{ listing.item.image.url }}" alt="" class="img-responsive">
+                                                        {% else %}
+                                                             <img src="/static/img/book1.jpg" alt="" class="img-responsive">
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ listing.item.title }}</td>
+                                                    <td>{{ listing.price }} </td>
+                                                    <td>{{ listing.seller.auth_user.first_name }} {{ listing.seller.auth_user.last_name }}</td>
+                                                    <td>{{ listing.seller.tel_no}}</td>
+                                                    <td>{{ listing.seller.auth_user.email}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">LISTING HISTORY</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Item Name</th>
+                                                    <th>Price</th>
+						                            <th>Buyer Name</th>
+						                            <th>Buyer Contact</th>
+                                                    <th>Buyer Email</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for listing in buyers_list %}
+                                                <tr>
+                                                    <td>
+                                                        {% if listing.item.image %}
+                                                        <img src="{{ listing.item.image.url }}" alt="" class="img-responsive">
+                                                        {% else %}
+                                                             <img src="/static/img/book1.jpg" alt="" class="img-responsive">
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ listing.item.title }}</td>
+                                                    <td>{{ listing.price }} </td>
+
+					                                <td>{{ listing.order.user.first_name }} {{ listing.order.last_name }}</td>
+						                            <td>{{ listing.order.user.tel_no }}</td>
+                                                    <td>{{ listing.order.user.email }}</td>
+
+                                                    <td> {{ listing.order.order_status }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+
+                    </div>
+                    <!-- /.col-md-9 -->
+
+                    <div class="col-md-3">
+
+                        <div class="box" id="order-summary">
+                            <div class="box-header">
+                                <h3>My Profile</h3>
+                            </div>
+                            <p class="text-muted"></p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <th>{{ site_user.auth_user.first_name }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <th>{{ site_user.auth_user.last_name }}</th>
+                                        </tr>
+					                    <tr>
+                                            <td>College</td>
+                                            <th>{{ site_user.college }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <th>{{ site_user.department }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Year</td>
+                                            <th>{{ site_user.year }}</th>
+                                        </tr>
+				                        <tr>
+                                            <td>Address</td>
+                                            <th>{{ site_user.address }}</th>
+                                        </tr>
+					                    <tr>
+                                            <td>Contact</td>
+                                            <th>{{ site_user.tel_no }}</th>
+                                        </tr>
+					                       <tr>
+                                            <td>Email</td>
+                                            <th>{{ site_user.auth_user.email }}</th>
+                                        </tr>
+					                       <tr>
+                                            <td>Username</td>
+                                            <th>{{ site_user.auth_user.username }}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+
+    <!-- #### JAVASCRIPT FILES ### -->
+{% include 'scripts.html' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+function alert(){
+//emailjs.sendForm("gmail","testing","formid");
+   swal("You order has been placed successfully")
+   // $(".btn-template-main").click(function(){  
+   //       $("#formid").submit();
+   //   });
+   var form = document.getElementById("formid");
+
+document.getElementById("buttonid").addEventListener("click", function () {
+  form.submit();
+});
+
+}
+</script>
+</body>
+
+</html>

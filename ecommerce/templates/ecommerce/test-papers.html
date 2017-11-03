@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body onload="send_query()">
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on ########## or ouremailid.com.</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="login">
+
+                                <a href="/store/logout/"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
+                                <!--redirect href on site homepage-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Site logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="/store/dashboard/" >Dashboard</a>
+                                </li>
+                                 <li>
+                                    <a href="/store/buy-books/" >Buy Items</a>
+                                </li>
+                                <li class="active">
+                                    <a href="/store/sell-books/" >Sell Items</a>
+                                </li>
+                                <li>
+                                    <a href="/store/test-papers/" >Test Papers</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Test Papers</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Dashboard</a>
+                            </li>
+                            <li>Test Papers</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <!-- *** LEFT COLUMN ***
+            _________________________________________________________ -->
+
+                    <div class="col-sm-3">
+
+                        <!-- *** MENUS AND FILTERS ***
+ _________________________________________________________ -->
+                        <div class="panel panel-default sidebar-menu">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Filter your Search</h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked category-menu">
+
+                                    <li class="active">
+                                        <a href="#">Search by Name</a>
+                                        <input type="text" placeholder="&nbsp; Enter Name" id="search-text-input" style="width:100%;margin-top:10px;margin-bottom:10px;border-radius: 20px;height:30px;"/>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Year<span class="badge pull-right">4</span></a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="year" onchange="setOptions();test1();">
+                                              <option value="Select">Select Year</option>
+                                              <option value="FE">FE</option>
+                                              <option value="SE">SE</option>
+                                              <option value="TE">TE</option>
+                                              <option value="BE">BE</option>
+                                        </select>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Department<span class="badge pull-right">8</span></a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="department" onchange="setOptions()">
+                                          <option value="Select">Select Department</option>
+                                          <option value="COMPS">Computers</option>
+                                          <option value="IT">IT</option>
+                                          <option value="ELEX">Electronics</option>
+                                          <option value="EXTC">EXTC</option>
+                                          <option value="MECH">Mechanical</option>
+                                          <option value="PROD">Production</option>
+                                          <option value="BIO">Biomedical</option>
+                                        </select>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Subject</a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="subject">
+                                             <option value="Select">Select Subject</option>
+                                        </select>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- *** MENUS AND FILTERS END *** -->
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** LEFT COLUMN END *** -->
+
+                    <!-- *** RIGHT COLUMN ***
+            _________________________________________________________ -->
+
+                    <div class="col-sm-9">
+
+                        <div class="row products" id="book-container">
+
+
+
+                        </div>
+
+                    </div>
+                        <!-- /.products -->
+
+
+
+                        <div style="margin-left:480px;">
+                            <p class="text-muted">In case you haven't found the item you are searching for, please click the button below.</p>
+                               <a href="/store/add-new-items/" class="btn btn-small btn-template-main" style="margin-bottom: 20px;margin-left: 190px;">Add New Item</a>
+
+                        </div>
+                    </div>
+                    <!-- /.col-md-9 -->
+
+                    <!-- *** RIGHT COLUMN END *** -->
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+
+    <!-- #### JAVASCRIPT FILES ### -->
+{% include 'scripts.html' %}
+<script type="text/javascript">
+// Get the modal
+var modal = document.getElementById('myModal');
+function close_modal_func(){
+    modal.style.display = "none";
+}
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+function test_paper_modal(img_id){
+    var img = document.getElementById(img_id)
+    var modalImg = document.getElementById("img01");
+    modal.style.display = "block";
+    modalImg.src = this.src;
+}
+
+// Get the <span> element that closes the modal
+
+</script>
+
+
+<script type="text/javascript">
+    function send_query(){
+        var query_object = new Object();
+        var search_text = document.getElementById("search-text-input")
+        var year = document.getElementById("year");
+        var department = document.getElementById("department");
+        var subject = document.getElementById("subject");
+        if (search_text.value){
+            query_object.title = search_text.value
+        }
+        if (year.value && year.value != "Select"){
+            query_object.year = year.value;
+        }
+
+        if (department.value && department.value != "Select"){
+            query_object.department = department.value;
+        }
+
+        if(subject.value && subject.value != "Select"){
+            query_object.subject = subject.value;
+        }
+        $.post("/store/get-test-papers/", JSON.stringify(query_object), function(data){set_items(data)});
+    }
+
+    function set_items(text){
+        document.getElementById("book-container").innerHTML = text
+    }
+        $(document).ready(function(){setOptions(); send_query(); });
+
+
+        document.getElementById("year").onchange = function(){setOptions(); send_query(); };
+        document.getElementById("department").onchange = function(){setOptions(); send_query();};
+        document.getElementById("subject").onchange = function(){setOptions(); send_query();};
+    document.getElementById("search-text-input").onchange = function(){send_query()};
+
+
+</script>
+
+<script type="text/javascript">
+$('select').select2();
+$(document).ready(function() {
+  $(".js-example-basic-single").select2();
+});
+</script>
+
+<script type="text/javascript">
+function setOptions()
+    {
+        debugger;
+    var year = document.getElementById("year");
+    var department = document.getElementById("department");
+    document.getElementById('subject').options.length = 0
+    var selIndex1 = year.selectedIndex;
+    var selIndex2 = department.selectedIndex;
+    if(selIndex1 == 1 && selIndex2 == 1)
+      addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 1){
+      addAllOptions('subject', ["Applied Mathematics III","OOPM", "DS", "TCS", "DLDA", "ECCF", "Applied Mathematics IV", "COA", "DBMS", "AOA", "TCS", "DSGT"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 1){
+      addAllOptions('subject', ["Microprocessor ","SOOAD", "Web Technologies Laboratory", "Business Communication and Ethics", "Computer Networks", "Operating Systems", "System Programming and Compiler Construction ", "Software Engineering ", "Distributed Databases ", "Mobile Communication and Computing ", "French", "German", "OR", "PM", "NP"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 1){
+      addAllOptions('subject', ["Digital Signal Processing ","Cryptography and System Security ", "Artificial Intelligence", "Network Threats and Attacks Laboratory", "Data Warehouse and Mining", "Human Machine Interaction", "Parallel and distributed Systems", "Cloud Computing Laboratory "]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 2)
+      addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 2){
+      addAllOptions('subject', ["SE IT1","SE IT2", "SE IT3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 2){
+      addAllOptions('subject', ["TE IT1","TE IT2", "TE IT3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 2){
+      addAllOptions('subject', ["BE IT1","BE IT2", "BE IT3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 3)
+      addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 3){
+      addAllOptions('subject', ["SE Electronics1","SE Electronics2", "SE Electronics3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 3){
+      addAllOptions('subject', ["TE Electronics1","TE Electronics2", "TE Electronics3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 3){
+      addAllOptions('subject', ["BE Electronics1","BE Electronics2", "BE Electronics3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 4)
+       addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 4){
+      addAllOptions('subject', ["SE EXTC1","SE EXTC2", "SE EXTC3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 4){
+      addAllOptions('subject', ["TE EXTC1","TE EXTC2", "TE EXTC3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 4){
+      addAllOptions('subject', ["BE EXTC1","BE EXTC2", "BE EXTC3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 5)
+       addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 5){
+      addAllOptions('subject', ["SE Mechanical1","SE Mechanical2", "SE Mechanical3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 5){
+      addAllOptions('subject', ["TE Mechanical1","TE Mechanical2", "TE Mechanical3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 5){
+      addAllOptions('subject', ["BE Mechanical1","BE Mechanical2", "BE Mechanical3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 6)
+       addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 6){
+      addAllOptions('subject', ["SE Production1","SE Production2", "SE Production3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 6){
+      addAllOptions('subject', ["TE Production1","TE Production2", "TE Production3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 6){
+      addAllOptions('subject', ["BE Production1","BE Production2", "BE Production3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 7)
+       addAllOptions('subject', ["BEE","Mechanics", "Applied Physics I", "Applied Mathematics I", "Applied Chemistry I", "EVS", "Applied Physics II", "Applied Mathematics II", "Applied Chemistry II", "CS", "SPA", "ED"]);
+    else if(selIndex1 == 2 && selIndex2 == 7){
+      addAllOptions('subject', ["SE Biomedical1","SE Biomedical2", "SE Biomedical3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 7){
+      addAllOptions('subject', ["TE Biomedical1","TE Biomedical2", "TE Biomedical3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 7){
+      addAllOptions('subject', ["BE Biomedical1","BE Biomedical2", "BE Biomedical3"]);
+    }
+  }
+
+function addAllOptions(selectID, values)
+  {
+    var arrayLength = values.length;
+    for (var i = 0; i < arrayLength; i++) {
+        appendOptionLast(selectID,values[i]);
+    }
+  }
+
+  function appendOptionLast(selectID, num)
+  {
+    var elSel = document.getElementById(selectID);
+
+    var elOptNew = document.createElement('option');
+    elOptNew.text = num;
+    elOptNew.value = 'a_' + num;
+
+    try {
+      elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+    }
+    catch(ex) {
+      elSel.add(elOptNew); // IE only
+    }
+  }
+
+    </script>
+<script>
+//for year dropdown
+$(document).ready(function() {
+    $('#year').change(function(){
+        var year = document.getElementById("year").value;
+    //give the path to the quering view with this in urls.py --> url(r'^path_to_app/(?P<year>\w+)$', 'app.views.function'),
+    // $.get is the jquery ajax get method to request
+        $.get('/path_to_app/' + year, function(data){
+               // do something here with a return value data, if desired
+        });
+    });
+});
+</script>
+
+</body>
+
+</html>

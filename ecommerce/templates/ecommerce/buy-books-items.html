@@ -1,0 +1,40 @@
+{% load staticfiles %}
+{% for listing in listings %}
+<div class="col-md-4 col-sm-6">
+    <!-- Product Items go here -->
+    <div class="product">
+        <div class="image">
+            <div class="box-image">
+                <div class="image">
+                    <img src="{{ listing.item.image.url }}" alt="" class="img-responsive" style="max-height: 350px;max-width: 250px;">
+                </div>
+                <div class="bg"></div>
+                <div class="name">
+                    <form action="/store/view-details/" method="post">
+                   <button type="submit" class="btn btn-template-transparent-primary"><h3>View Details</h3></button>
+                   <input type="hidden" name="listing_id" value={{ listing.id }}></input>
+               </form>
+
+                </div>
+                 <div class="text">
+                    <p class="buttons">
+
+                     <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+            <h3 style="margin-bottom:0px;"><a href="shop-detail.html">{{ listing.item.title }}</a></h3>
+            <p class="price">&#x20b9;{{ listing.price }}</p>
+            <form action="/store/add-to-cart/" method="post">
+                <input type="hidden" name="listing_id" value={{ listing.id }}></input>
+                <button type="submit" class="btn btn-template-main"><i class="fa fa-plus-square"></i> Add to Cart</button>
+                </form>
+        </div>
+        <!-- /.text -->
+    </div>
+</div>
+
+{% endfor %}

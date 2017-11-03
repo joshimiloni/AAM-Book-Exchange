@@ -1,0 +1,9 @@
+1. PLEASE Set your text editor to use spaces instead of tabs
+    (Reason: Python needs either only tabs, or only spaces,
+    and spaces are more consistently displayed across editors)
+2. We should NOT have messed with the django.contrib.auth.User,
+    instead, we should have created a model with a OneToOne relationship
+    with a django.contrib.auth.User (Something like SiteUser)
+
+3. models.py needs to be a part of an app
+4. settings.py needs to be updated with the LOGIN_URL (see: reverse_lazy())

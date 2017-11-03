@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>New post</h1><br />
+    <form method="POST" action="/new_post/">
+    {% csrf_token %}
+
+        <div class="form-group row">
+        	<label class="col-2 col-form-label">Title</label>
+        	<div class="col-10">
+        		<input class="form-control" name="title" type="text" placeholder="Title of your Post"></input>
+        	</div>
+        </div><br/>
+        <div class="form-group row">
+
+        	<label class="col-2 col-form-label">Content</label>
+        	<div class="col-10">
+				<textarea class="form-control" name="text" placeholder="Content for your Post"></textarea>
+			</div>
+        </div><br />
+        	<button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+
+{% endblock %}

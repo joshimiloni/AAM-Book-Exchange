@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+            _________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on ########## or ouremailid.com.</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="login">
+
+                                <a href="/store/logout/"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
+                                <!--redirect href on login register-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
+            <!-- *** NAVBAR ***
+            _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Site logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="/store/dashboard/" >Dashboard</a>
+                                </li>
+                                 <li class="active">
+                                    <a href="/store/buy-books/" >Buy Items</a>
+                                </li>
+                                <li>
+                                    <a href="/store/sell-books/" >Sell Items</a>
+                                </li>
+                                <li>
+                                    <a href="/store/test-papers/" >Test Papers</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                                    </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Sell Items</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Dashboard</a>
+                            </li>
+                            <li>Sell Items</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <!-- *** LEFT COLUMN ***
+
+
+                    <!-- *** MENUS AND FILTERS ***
+                    _________________________________________________________ -->
+                    <div class="col-sm-3">
+                        <div class="panel panel-default sidebar-menu">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Filter your Search</h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked category-menu">
+
+                                    <li class="active">
+                                        <a href="#">Search by Name</a>
+                                        <input type="text" placeholder="&nbsp; Enter Name" style="width:100%;margin-top:10px;margin-bottom:10px;border-radius: 20px;height:30px;"/>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Year<span class="badge pull-right">4</span></a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="year" onchange="setOptions()">
+                                            <option value="Select">Select Year</option>
+                                            <option value="FE">FE</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TE">TE</option>
+                                            <option value="BE">BE</option>
+                                        </select>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Department<span class="badge pull-right">8</span></a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="department" onchange="setOptions()">
+                                            <option value="Select">Select Department</option>
+                                            <option value="COMPS">Computers</option>
+                                            <option value="IT">IT</option>
+                                            <option value="Electronics">Electronics</option>
+                                            <option value="EXTC">EXTC</option>
+                                            <option value="Mechanical">Mechanical</option>
+                                            <option value="Production">Production</option>
+                                            <option value="Biomedical">Biomedical</option>
+                                        </select>
+                                    </li>
+                                    <br>
+                                    <li class="active">
+                                        <a href="#">Subject</a>
+                                        <select class="js-example-basic-single" style="width:100%;margin-top:10px;margin-bottom:10px;height:30px;" id="subject">
+                                            <option value="Select">Select Subject</option>
+                                        </select>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- *** MENUS AND FILTERS END *** -->
+
+                    </div>
+                    <!-- /.col-md-3 -->
+                    <!-- *** LEFT COLUMN END *** -->
+
+
+                    <!-- *** RIGHT COLUMN ***
+                    _________________________________________________________ -->
+
+
+                    <div class="col-md-9">
+
+                        <div class="row" id="productMain">
+                            <div class="col-sm-4">
+                                <div id="mainImage">
+                                    <img src="{{ book.image.url }}" alt="" class="img-responsive" style="max-height: 350px;max-width: 250px;">
+                                </div>
+
+                                <form action="/store/add-to-cart" method="post" >
+                                    <div class="sizes">
+
+                                        <h3 style="margin-bottom:0px">{{ book.title }}</h3>
+                                        <h2>&#x20b9; {{ book.max_price }}</h2>
+
+                                    </div>
+
+                                    <p class="text-center">
+                                        <button type="submit" class="btn btn-template-main" /><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                    </p>
+
+                                </form>
+                            </div>
+                            <div class="col-sm-8">
+                                <br>
+                                <h4>Product description</h4>
+                                <p>{{ book.description }}</p>
+                                <h4>Authors</h4>
+                                <p>{{ book.author }}</p>
+
+                                <h4>Publisher</h4>
+                                <p>{{ book.publisher }}</p>
+
+                                <h4>Department</h4>
+                                <p>{{ book.department }}</p>
+
+                                <h4>Year</h4>
+                                <p>{{ book.year }}</p>
+
+                                <h4>Subject</h4>
+                                <p>{{ book.subject }}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-9 -->
+
+                    <!-- /.col-md-9 -->
+
+                    <!-- *** RIGHT COLUMN END *** -->
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** FOOTER ***
+        _________________________________________________________ -->
+
+        <!-- *** COPYRIGHT ***
+        _________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+                    <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <!-- /#copyright -->
+
+    <!-- *** COPYRIGHT END *** -->
+    {% include 'scripts.html' %}
+
+
+</div>
+<!-- /#all -->
+<script type="text/javascript">
+function setOptions()
+{
+    var year = document.getElementById("year");
+    var department = document.getElementById("department");
+    document.getElementById('subject').options.length = 0
+    var selIndex1 = year.selectedIndex;
+    var selIndex2 = department.selectedIndex;
+    if(selIndex1 == 1 && selIndex2 == 1)
+    addAllOptions('subject', ["FE Comps1","FE Comps2", "FE Comps3"]);
+    else if(selIndex1 == 2 && selIndex2 == 1){
+        addAllOptions('subject', ["SE Comps1","SE Comps2", "SE Comps3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 1){
+        addAllOptions('subject', ["TE Comps1","TE Comps2", "TE Comps3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 1){
+        addAllOptions('subject', ["BE Comps1","BE Comps2", "BE Comps3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 2)
+    addAllOptions('subject', ["FE IT1","FE IT2", "FE IT3"]);
+    else if(selIndex1 == 2 && selIndex2 == 2){
+        addAllOptions('subject', ["SE IT1","SE IT2", "SE IT3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 2){
+        addAllOptions('subject', ["TE IT1","TE IT2", "TE IT3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 2){
+        addAllOptions('subject', ["BE IT1","BE IT2", "BE IT3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 3)
+    addAllOptions('subject', ["FE Electronics1","FE Electronics2", "FE Electronics3"]);
+    else if(selIndex1 == 2 && selIndex2 == 3){
+        addAllOptions('subject', ["SE Electronics1","SE Electronics2", "SE Electronics3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 3){
+        addAllOptions('subject', ["TE Electronics1","TE Electronics2", "TE Electronics3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 3){
+        addAllOptions('subject', ["BE Electronics1","BE Electronics2", "BE Electronics3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 4)
+    addAllOptions('subject', ["FE EXTC1","FE EXTC2", "FE EXTC3"]);
+    else if(selIndex1 == 2 && selIndex2 == 4){
+        addAllOptions('subject', ["SE EXTC1","SE EXTC2", "SE EXTC3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 4){
+        addAllOptions('subject', ["TE EXTC1","TE EXTC2", "TE EXTC3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 4){
+        addAllOptions('subject', ["BE EXTC1","BE EXTC2", "BE EXTC3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 5)
+    addAllOptions('subject', ["FE Mechanical1","FE Mechanical2", "FE Mechanical3"]);
+    else if(selIndex1 == 2 && selIndex2 == 5){
+        addAllOptions('subject', ["SE Mechanical1","SE Mechanical2", "SE Mechanical3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 5){
+        addAllOptions('subject', ["TE Mechanical1","TE Mechanical2", "TE Mechanical3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 5){
+        addAllOptions('subject', ["BE Mechanical1","BE Mechanical2", "BE Mechanical3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 6)
+    addAllOptions('subject', ["FE Production1","FE Production2", "FE Production3"]);
+    else if(selIndex1 == 2 && selIndex2 == 6){
+        addAllOptions('subject', ["SE Production1","SE Production2", "SE Production3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 6){
+        addAllOptions('subject', ["TE Production1","TE Production2", "TE Production3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 6){
+        addAllOptions('subject', ["BE Production1","BE Production2", "BE Production3"]);
+    }
+    else if(selIndex1 == 1 && selIndex2 == 7)
+    addAllOptions('subject', ["FE Biomedical1","FE Biomedical2", "FE Biomedical3"]);
+    else if(selIndex1 == 2 && selIndex2 == 7){
+        addAllOptions('subject', ["SE Biomedical1","SE Biomedical2", "SE Biomedical3"]);
+    }
+    else if(selIndex1 == 3 && selIndex2 == 7){
+        addAllOptions('subject', ["TE Biomedical1","TE Biomedical2", "TE Biomedical3"]);
+    }
+    else if(selIndex1 == 4 && selIndex2 == 7){
+        addAllOptions('subject', ["BE Biomedical1","BE Biomedical2", "BE Biomedical3"]);
+    }
+}
+
+function addAllOptions(selectID, values)
+{
+    var arrayLength = values.length;
+    for (var i = 0; i < arrayLength; i++) {
+        appendOptionLast(selectID,values[i]);
+    }
+}
+
+function appendOptionLast(selectID, num)
+{
+    var elSel = document.getElementById(selectID);
+
+    var elOptNew = document.createElement('option');
+    elOptNew.text = num;
+    elOptNew.value = 'a_' + num;
+
+    try {
+        elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+    }
+    catch(ex) {
+        elSel.add(elOptNew); // IE only
+    }
+}
+
+</script>
+
+</body>
+
+</html>

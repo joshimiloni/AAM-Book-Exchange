@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+{% load staticfiles %}
+<body>
+
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+
+
+            <!-- *** TOP END *** -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on $$$$$$$$$$$ or ########</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+
+
+                            <div class="login">
+                                <a href="/store/login-register/"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Register/Login</span></a>
+                           </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                         <div class="navbar-collapse collapse" id="navigation">
+
+                           <ul class="nav navbar-nav navbar-right">
+                                <li  class="dropdown active">
+                                    <a href="/">HOME </a>
+                                </li>
+                               <li>
+                                    <a href="/features" class="dropdown-toggle" data-toggle="dropdown">FEATURES <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/features/#books">BOOKS AND EQUIPMENTS</a>
+                                        </li>
+                                        <li><a href="/features/#testpapers">TEST PAPERS</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/faq" class="dropdown-toggle active" >FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="/contact" class="dropdown-toggle" >CONTACT US</a>
+                                </li>
+                                <li>
+                                    <a href="/team" class="dropdown-toggle" >OUR TEAM</a>
+                                </li>
+
+                                <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+										<button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+									</span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+        <section>
+            <!-- *** HOMEPAGE CAROUSEL ***
+ _________________________________________________________ -->
+
+            <div class="home-carousel">
+
+                <div class="dark-mask"></div>
+
+                <div class="container">
+                    <div class="homepage owl-carousel">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-5 right">
+                                    <h1>BOOKS</h1>
+                                    <ul class="list-style-none">
+                                        <li style="color: #555555;">Sell your old books.</li>
+                                        <br>
+                                        <li style="color: #555555;">Buy books that you need.</li>
+                                        <br>
+                                        <li style="color: #555555;">Choose from a wide spectrum of reference books!</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="/static/img/Scr2.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+
+                                <div class="col-sm-7 text-center">
+                                    <img class="img-responsive" src="/static/img/Scr5.png" alt="">
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <h2>EQUIPMENT</h2>
+                                    <ul class="list-style-none">
+                                        <li style="color: #555555;">Buy equipment.</li>
+                                        <br>
+                                        <li style="color: #555555;">Sell equipment</li>
+                                        <br>
+                                        <li style="color: #555555;">Discover a broad range of tools!</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-5 right">
+                                    <h1>TEST PAPERS</h1>
+                                    <ul class="list-style-none">
+                                        <li style="color: #555555;">Get prepared for exams.</li>
+                                        <br>
+                                        <li style="color: #555555;">Previous year term test papers.</li>
+                                        <br>
+                                        <li style="color: #555555;">Easy access to unlimited content.</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="/static/img/Scr4.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="item">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="/static/img/template-easy-code.png" alt="">
+                                </div>
+                                <div class="col-sm-5">
+                                    <h1>DISCUSSION FORUM</h1>
+                                    <ul class="list-style-none">
+                                        <li style="color: #555555;">Talk to experienced seniors.</li>
+                                        <br>
+                                        <li style="color: #555555;">Get all your doubts cleared.</li>
+                                        <br>
+                                        <li style="color: #555555;">Get a meaningful insight into real time experiences!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!-- /.project owl-slider -->
+                </div>
+            </div>
+
+            <!-- *** HOMEPAGE CAROUSEL END *** -->
+        </section>
+
+
+
+        <section class="bar background-pentagon no-mb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="heading text-center">
+                            <h2>Testimonials</h2>
+                        </div>
+
+                        <p class="lead">We are working with many clients and we love to hear their experiences. We always appreciate good reviews, and strive to make this platform bigger and better by incorporating user feedback. Have a look what our clients said about us.</p>
+
+
+                       <!-- *** TESTIMONIALS CAROUSEL ***
+ _________________________________________________________ -->
+
+                        <ul class="owl-carousel testimonials same-height-row">
+                            <li class="item" style="height:250px;">
+                                <div class="testimonial same-height-always">
+                                    <div class="text">
+                                        <p>Great product. Keep up the good work! Very useful for students like us who are constantly in need of books at affordable rates and markings by seniors. Travelling to book shops to return is not a pain now.</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <div class="icon"><i class="fa fa-quote-left"></i>
+                                        </div>
+                                        <div class="name-picture">
+                                            <img class="" alt="" src="img/person-1.jpg">
+                                            <h5>Jahanvi Jasani</h5>
+                                            <p>Student, TE Comps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item" style="height:250px;">
+                                <div class="testimonial same-height-always">
+                                    <div class="text" >
+                                        <p>It is a revolutionary product that has changed student life forever. I never imagined it could be so easy to sell off my old books and get new ones at such great prices. Keep up the good work!</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <div class="icon"><i class="fa fa-quote-left"></i>
+                                        </div>
+                                        <div class="name-picture">
+                                            <img class="" alt="" src="img/person-2.jpg">
+                                            <h5>Rohan Mehra</h5>
+                                            <p>Student, SE Comps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item" style="height:250px;">
+                                <div class="testimonial same-height-always">
+                                    <div class="text">
+                                        <p>Amazing concept. Until now, due to the change in syllabus every year, we could never return our old useless books to the book shops. But now, thanks to this product, it is as hassle-free as it could get. Kudos.</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <div class="icon"><i class="fa fa-quote-left"></i>
+                                        </div>
+                                        <div class="name-picture">
+                                            <img class="" alt="" src="img/person-3.png">
+                                            <h5>Dhruvesh Mehta</h5>
+                                            <p>Student, BE Comps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item" style="height:250px;">
+                                <div class="testimonial same-height-always">
+                                    <div class="text">
+                                        <p>Fantastic product. I wish someone had designed this earlier, so that our seniors could also avail the benefits of this. I never imagined it could be so easy to sell off my old books and get new ones at such great prices.</p>
+                                    </div>
+
+                                    <div class="bottom">
+                                        <div class="icon"><i class="fa fa-quote-left"></i>
+                                        </div>
+                                        <div class="name-picture">
+                                            <img class="" alt="" src="img/person-4.jpg">
+                                            <h5>Ankit Desai</h5>
+                                            <p>Student, TE Comps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item" style="height:250px;">
+                                <div class="testimonial same-height-always">
+                                    <div class="text">
+                                        <p>Innovative and thoughtful concept. Practicality and simplicity has been perfectly blended and that makes this product work wonders. It would be great to see the product expanding to other colleges. </p>
+                                    </div>
+
+                                    <div class="bottom">
+                                        <div class="icon"><i class="fa fa-quote-left"></i>
+                                        </div>
+                                        <div class="name-picture">
+                                            <img class="" alt="" src="img/person-4.jpg">
+                                            <h5>Soham Chitalia</h5>
+                                            <p>Student, TE Comps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- /.owl-carousel -->
+
+                        <!-- *** TESTIMONIALS CAROUSEL END *** -->                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- /.bar -->
+
+        <br/>
+
+        <section class="bar no-mb">
+        <div class="dark-mask" style="background: #8adfef;"></div>
+                <div class="container">
+                    <div class="row showcase">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="item">
+                                <div class="icon"><i class="fa fa-align-justify"></i>
+                                </div>
+                                <h4><span class="counter">4</span><br>
+
+        Colleges</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="item">
+                                <div class="icon"><i class="fa fa-users"></i>
+                                </div>
+                                <h4><span class="counter">73</span><br>
+
+        Users</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="item">
+                                <div class="icon"><i class="fa fa-copy"></i>
+                                </div>
+                                <h4><span class="counter">128</span><br>
+
+        Books</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="item">
+                                <div class="icon"><i class="fa fa-font"></i>
+                                </div>
+                                <h4><span class="counter">56</span><br>
+
+        Other Items</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </section>
+
+
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+
+{% include 'scripts.html' %}
+
+
+
+
+
+</body>
+
+</html>

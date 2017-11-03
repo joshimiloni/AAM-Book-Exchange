@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body>
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on ########## or ouremailid.com.</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="login">
+
+                                <a href="customer-register.html"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
+                                <!--redirect href on register-login-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Site logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active">
+                                    <a href="#" >Dashboard</a>
+                                </li>
+                                 <li>
+                                    <a href="buy-books.html" >Buy Items</a>
+                                </li>
+                                <li>
+                                    <a href="sell-books.html" >Sell Items</a>
+                                </li>
+                                <li>
+                                    <a href="#" >Test Papers</a>
+                                </li>
+                                <li>
+                                    <a href="#" >Discussion Forum</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Dashboard</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                	<div class="col-md-9 clearfix" id="checkout">
+
+                            <form method="post" action="/store/remove-from-cart">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">MY CART</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Seller Name</th>
+                                                    <th>Seller Contact</th>
+                                                    <th>Seller Email</th>
+                                                    <th>Status</th>
+                                                    <th>Customize Cart</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               {% for cart in listings %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">
+                                                            <img src="/static/img/detailsquare.jpg" alt="White Blouse Armani">
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ cart.item.title }}</td>
+                                                    <td>{{ cart.price }}</td>
+
+                                                    {% for cartseller in new_listingscart %}
+					                                <td>{{ cartseller.first_name }} {{ cartseller.last_name }}</td>
+                                                    <td>{{ cartseller.tel_no}}</td>
+                                                    <td>{{ cartseller.email}}</td>
+                                                    {% endfor %}
+
+                                                    <td>{{ listing.order.order_status }}</td>
+                                                    <td> <button type="submit" class="btn btn-template-main">Checkout</button>
+							<button type="submit" class="btn" style="color:#d06260;background-color:#ffffff !important;border-color:#d06260;">Remove</button></td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+                            </form>
+
+                            <form method="post" action="shop-checkout4.html">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">ORDER HISTORY</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Seller Name</th>
+                                                    <th>Seller Contact</th>
+                                                    <th>Seller Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for order in listings %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">
+                                                            <img src="/static/img/detailsquare.jpg" alt="White Blouse Armani">
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ order.item.title }}</td>
+                                                    <td>{{ order.price }} </td>
+
+                                                    {% for cartseller in new_listingsorder %}
+                                                    <td>{{ cartseller.first_name }} {{ cartseller.last_name }}</td>
+                                                    <td>{{ cartseller.tel_no}}</td>
+                                                    <td>{{ cartseller.email}}</td>
+                                                    {% endfor %}
+
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+                            </form>
+
+			     <form method="post" action="shop-checkout4.html">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active"><a href="#">LISTING HISTORY</a>
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+						                            <th>Item Name</th>
+                                                    <th>Price</th>
+						                            <th>Buyer Name</th>
+						                            <th>Buyer Contact</th>
+                                                    <th>Buyer Email</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for listing in listings %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">
+                                                            <img src="/static/img/detailsquare.jpg" alt="White Blouse Armani">
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ listing.item.title }}</td>
+                                                    <td>{{ listing.price }} </td>
+
+                                                    {% for buyer in buyers_list %}
+
+					                                <td>{{ buyer.first_name }} {{ buyer.last_name }}</td>
+						                            <td>{{ buyer.tel_no }}</td>
+                                                    <td>{{ buyer.email }}</td>
+
+                                                    {% endfor %}
+
+                                                    <td> {{ listing.order.order_status }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.content -->
+                            </form>
+
+                    </div>
+                    <!-- /.col-md-9 -->
+
+                    <div class="col-md-3">
+
+                        <div class="box" id="order-summary">
+                            <div class="box-header">
+                                <h3>My Profile</h3>
+                            </div>
+                            <p class="text-muted"></p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        {% for user in site_user %}
+                                        <tr>
+                                            <td>First Name</td>
+                                            <th>{{ user.first_name }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <th>{{ user.last_name }}</th>
+                                        </tr>
+					                    <tr>
+                                            <td>College</td>
+                                            <th>{{ user.college }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <th>{{ user.department }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Year</td>
+                                            <th>{{ user.year }}</th>
+                                        </tr>
+				                        <tr>
+                                            <td>Address</td>
+                                            <th>{{ user.address }}</th>
+                                        </tr>
+					                    <tr>
+                                            <td>Contact</td>
+                                            <th>{{ user.tel_no }}</th>
+                                        </tr>
+					                       <tr>
+                                            <td>Email</td>
+                                            <th>{{ user.email }}</th>
+                                        </tr>
+					                       <tr>
+                                            <td>Username</td>
+                                            <th>{{ user.username }}</th>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+
+    <!-- #### JAVASCRIPT FILES ### -->
+{% include 'scripts.html' %}
+
+
+<script type="text/javascript">
+$('select').select2();
+$(document).ready(function() {
+  $(".js-example-basic-single").select2();
+});
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
+</body>
+
+</html>

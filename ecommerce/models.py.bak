@@ -1,0 +1,60 @@
+from django.db import models
+import mysite.mysite.model_enums as enums
+from django.contrib.auth.models import User as DjangoUser
+
+
+# NOTE: remember to implement choices
+# http://blog.richard.do/index.php/2014/02/how-to-use-enums-for-django-field-choices/
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    max_price = models.IntegerField()
+    publisher = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    subject = models.ManyToManyField(Subject)
+    department = models.ManyToManyField(Department)
+    type = models.CharField()
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=30)
+    department = models.ForeignKey(Department)
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=20, choices=enums.DepartmentEnum.get_choices())
+
+
+class User(models.Model, DjangoUser):
+    tel_no = models.CharField(max_length=20)
+    college = models.CharField(max_length=50)
+    address = models.TextField(max_length=150)
+    year = models.DateField()
+    department = models.ForeignKey(Department)
+
+
+class Listing(models.Model):
+    book_id = models.ForeignKey(Book)
+    price = models.IntegerField()
+    order_id = models.ForeignKey(Order)
+
+
+class Order(models.Model):
+    # add stuff here later
+    # total_price needs to be from query
+    order_date_time = models.DateTimeField()
+    order_user = models.ForeignKey(User)
+
+
+class Session(models.Model):
+    user_id = models.ForeignKey(User)
+    start_date_time = models.DateTimeField()
+    end_date_time = models.DateTimeField()
+
+
+class Requests(models.Model):
+    book_id = models.ForeignKey(Book)
+    user_id = models.ForeignKey(User)
+    request_date_time = models.DateTimeField()
+    request_message = models.TextField(max_length=200)

@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<!-- do test papers instead of books everywhere-->
+{% for book in books %}
+<div class="col-md-4 col-sm-6">
+    <!-- Product Items go here -->
+    <div class="product">
+        <!-- <div class="image">
+            <div class="box-image"> -->
+                <div class="image">
+                    {% if book.image %}
+                    <img id="paper_image_{{ book.id }}"src="{{ book.image.url }}" alt="" class="img-responsive" onclick="test_paper_modal("paper_image_{{ book.id }}")">
+                    {% else %}
+                    <img src="/static/img/book1.jpg" alt="" class="img-responsive">
+                    {% endif %}
+                </div>
+                <div class="bg"></div>
+                <!-- <div class="name">
+                    <div class="text">
+                        <h3 style="margin-bottom:0px;"><a href="shop-detail.html">{{ book.title }}</a></h3>
+                        <p class="price">&#x20b9;{{ book.max_price }}</p>
+                            <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-template-main" role="button"><i class="fa fa-plus-square"></i>View</a>
+                    </div>
+                </div>
+                 <div class="text">
+                    <p class="buttons">
+
+                     <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                    </p>
+                </div> -->
+            <!-- </div>
+        </div> -->
+        <!-- /.image -->
+
+        <!-- /.text -->
+    </div>
+</div>
+{% endfor %}
+<!-- <h2>Image Modal</h2>
+<p>In this example, we use CSS to create a modal (dialog box) that is hidden by default.</p>
+<p>We use JavaScript to trigger the modal and to display the current image inside the modal when it is clicked on. Also note that we use the value from the image's "alt" attribute as an image caption text inside the modal.</p> -->
+
+<!-- <img id="myImg" src="{{ book.image.url }}" alt="Trolltunga, Norway" width="500" height="1000"> -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span id="close_modal" onclick="close_modal_func()">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>

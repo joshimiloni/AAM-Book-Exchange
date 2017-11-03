@@ -1,0 +1,659 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, \
+    Http404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from .models import SiteUser, Item, Listing, Cart, UserSession
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+import json
+from . import utils
+from django.template.loader import render_to_string
+from django.template import RequestContext
+from django.contrib.auth.signals import user_logged_in
+from django.contrib import messages
+import datetime
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+# Create your views here.
+
+
+######### new code ##########
+@csrf_exempt
+def view_listing_details(request):
+    if request.method == 'POST':
+        book_id = request.POST['listing_id']
+        listing = Listing.objects.get(id=book_id)
+        book = listing.item
+        book.max_price = listing.price
+        return render(request, 'book_details.html', {"book": book})
+    else:
+        return HttpResponse()
+
+
+@csrf_exempt
+def view_book_details(request):
+    if request.method == 'POST':
+        book_id = request.POST['book_id']
+        book = Item.objects.get(id=book_id)
+        return render(request, 'book_details.html', {"book": book})
+    else:
+        return HttpResponse()
+
+
+def user_logged_in_handler(sender, request, user, **kwargs):
+    UserSession.objects.get_or_create(
+        user=user,
+        session_id=request.session.session_key
+    )
+    user_logged_in.connect(user_logged_in_handler)
+
+
+def delete_user_sessions(user):
+    user_sessions = UserSession.objects.filter(user=user)
+    for user_session in user_sessions:
+        user_session.session.delete()
+
+
+######### new code ##########
+
+
+@csrf_exempt
+def register_user(request):
+    print('hello')
+    if request.method == 'POST':
+        first_name_req = request.POST.get('firstnameregister', None)
+        last_name_req = request.POST.get('lastnameregister', None)
+        college = request.POST.get('collegeregister', None)
+        year = request.POST.get('yearregister', None)
+        address = request.POST.get('addressregister', None)
+        telephone = request.POST.get('telregister', None)
+        email = request.POST.get('emailregister', None)
+        username = request.POST.get('usernameregister', None)
+        password = request.POST.get('passwordregister', None)
+        dept = request.POST.get('deptregister', None)
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            first_name=first_name_req,
+            last_name=last_name_req
+        )
+        site_user = SiteUser(
+            auth_user=user,
+            tel_no=telephone,
+            college=college,
+            year=utils.get_joining_date(year),
+            address=address,
+            department=dept
+        )
+        site_user.save()
+        return render(request, 'customer-register.html')
+
+
+@csrf_exempt
+def login_user(request):
+    print("login attempt")
+    if request.method == 'POST':
+        username = request.POST['username-login']
+        password = request.POST['password-login']
+        print("Attempt:   " + username + ", " + password)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("Logged in")
+            return redirect('/store/dashboard/')
+        else:
+            print("Invalid User")
+            return render(request, 'customer-register.html',
+                          {'message': "Invalid Login Details"})
+    else:
+        return render(request, 'customer-register.html')
+
+
+@csrf_exempt
+@login_required
+def logout_user(request):
+    if request.user.is_authenticated():
+        logout(request)
+        return redirect('/store/login-register/')
+    else:
+        return HttpResponse('you need to log in to log out')
+
+
+@csrf_exempt
+def login_register_user(request):
+    return render(request, 'customer-register.html')
+
+
+@csrf_exempt
+@login_required
+def addnewitem(request):
+    if request.method == 'POST':
+        itemtype = request.POST['itemtype']
+        title = request.POST['title']
+        year = request.POST['year']
+        department = request.POST['department']
+        maxprice = request.POST['maxprice']
+        subject = request.POST['subject']
+        author = request.POST['author']
+        publisher = request.POST['publisher']
+        description = request.POST['description']
+        item = Item(
+            itemtype=itemtype,
+            title=title,
+            year=year,
+            department=department,
+            max_price=maxprice,
+            subject=subject,
+            author=author,
+            publisher=publisher,
+            description=description,
+        )
+        if request.FILES['image']:
+           item.image = request.FILES['image']
+        item.quantity = 0
+        item.save()
+        return redirect('/store/sell-books/')
+    else:
+        return render(request, 'add-item.html')
+
+
+@csrf_exempt
+@login_required
+def user_dashboard(request):
+    return render(request, 'user-dashboard.html')
+
+
+@csrf_exempt
+@login_required
+def admin_dashboard(request):
+    return render(request, 'admin-dashboard.html')
+
+
+@csrf_exempt
+@login_required
+def product_detail(request):
+    return render(request, 'productdetail.html')
+
+
+@csrf_exempt
+@login_required
+def add_item(request):
+    return render(request, 'add-item.html')
+
+
+@csrf_exempt
+@login_required
+def buy_books(request):
+    return render(request, 'buy-books.html')
+
+
+@csrf_exempt
+@login_required
+def show_dashboard(request):
+    if request.user.is_superuser:
+        return query_admin_dashboard(request)
+    else:
+        return query_user_dashboard(request)
+
+
+@csrf_exempt
+@login_required
+def sell_books(request):
+    return render(request, 'sell-books.html')
+
+
+@csrf_exempt
+@login_required
+def test_papers(request):
+    return render(request, 'test-papers.html')
+
+
+@csrf_exempt
+@login_required
+def add_new_listing(request):
+    if request.method == 'POST':
+        item_id = request.POST['item_id']
+        price = request.POST['price']
+        seller = SiteUser.objects.get(auth_user_id=request.user.id)
+        item = Item.objects.get(id=item_id)
+        Listing.objects.create(
+            item=item,
+            price=price,
+            seller=seller,
+        )
+        return redirect('/store/user-dashboard/')
+
+
+@csrf_exempt
+@login_required
+def real_query_item_listings(request):
+    html = ""
+    if request.method == "POST" and request.is_ajax:
+        filters = json.loads(request.body)
+        listings = Listing.objects.exclude(order__order_status="dispatched")
+        if filters.get('title', None) is not None:
+            titles = listings.filter(item__title__icontains=filters["title"])
+            authors = listings.filter(item__author__icontains=filters["title"])
+            publishers = listings.filter(
+                item__publisher__icontains=filters["title"]
+            )
+            listings = titles.union(authors, publishers)
+        if filters.get('department', None) is not None:
+            listings = listings.filter(item__department=filters['department'])
+        if filters.get('subject', None) is not None:
+            listings = listings.filter(item__subject=filters['subject'])
+        if filters.get('year', None) is not None:
+            listings = listings.filter(item__year=filters['year'])
+        html = render_to_string(
+            'buy-books-items.html',
+            {"listings": listings},
+        )
+    return JsonResponse(html, safe=False)
+
+
+@csrf_exempt
+@login_required
+def real_query_books(request):
+    if request.method == 'POST' and request.is_ajax:
+        filters = json.loads(request.body)
+        books = Item.objects.exclude(itemtype__iexact="testpaper")
+        if filters.get('title', None) is not None:
+            # books = books.filter(title__icontains=filters['title'])
+            titles = books.filter(title__icontains=filters["title"])
+            authors = books.filter(author__icontains=filters["title"])
+            publishers = books.filter(
+                publisher__icontains=filters["title"]
+            )
+            books = titles.union(authors, publishers)
+        if filters.get('department', None) is not None:
+            books = books.filter(department__iexact=filters['department'])
+        if filters.get('subject', None) is not None:
+            books = books.filter(subject__iexact=filters['subject'])
+        if filters.get('year', None) is not None:
+            print("year: " + filters["year"])
+            books = books.filter(year__iexact=filters['year'])
+
+        paginator = Paginator(books, 9)
+        page = request.GET.get('page')
+        try:
+            books = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            books = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            books = paginator.page(paginator.num_pages)
+
+        html = render_to_string(
+            'sell-books-items.html',
+            {"books": books},
+        )
+        return JsonResponse(html, safe=False)
+    else:
+        return HttpResponse()
+
+
+@csrf_exempt
+@login_required
+def query_test_papers(request):
+    if request.method == 'POST' and request.is_ajax:
+        filters = json.loads(request.body)
+        books = Item.objects.filter(itemtype__iexact="testpaper")
+        if filters.get('title', None) is not None:
+            books = books.filter(title__contains=filters['title'])
+        if filters.get('department', None) is not None:
+            books = books.filter(department=filters['department'])
+        if filters.get('subject', None) is not None:
+            books = books.filter(subject=filters['subject'])
+        if filters.get('year', None) is not None:
+            books = books.filter(year=filters['year'])
+
+        paginator = Paginator(books, 9)
+        page = request.GET.get('page')
+        try:
+            books = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            books = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999),
+            # deliver last page of results.
+            books = paginator.page(paginator.num_pages)
+
+        html = render_to_string(
+            'test-papers-items.html',
+            {"books": books},
+        )
+        return JsonResponse(html, safe=False)
+    else:
+        return HttpResponse()
+
+        # def display_items_with_filter(request):
+        # # Skeleton code for now. Request parameters subject to change
+        # text = request.search_text
+        # year = request.book_year
+        # department = request.book_dept
+        # max_price = request.max_price
+        # min_price = request.min_price
+        # title_vector = SearchVector('book__title', weight='A')
+        # publisher_vector = SearchVector('book__publisher', weight='B')
+        # return HttpResponse(status=200)
+        # # Skeleton code for now. Request parameters subject to change
+        # text = request.search_text
+        # year = request.book_year
+        # department = request.book_dept
+        # max_price = request.max_price
+        # min_price = request.min_price
+        # title_vector = SearchVector('book__title', weight='A')
+        # publisher_vector = SearchVector('book__publisher', weight='B')
+        # return HttpResponse(status=200)
+
+#for admin dashboard
+
+
+@login_required
+@csrf_exempt
+def query_admin_dashboard(request):
+    #for count blocks = correct
+    user_count = SiteUser.objects.count()
+    item_count = Item.objects.count()
+    listing_count = Listing.objects.count()
+    order_count = Cart.objects.filter(order_status='dispatched').count()
+
+    #for my profile = correct
+    site_user = SiteUser.objects.get(auth_user_id=request.user.id)
+
+    users = SiteUser.objects.all()
+    buyerlistings = Listing.objects.all()
+    # sellerlistings = Listing.objects.filter(seller__auth_user_id=users.id)
+    #for order history of all orders
+    # seller_listingsorder = []
+    # buyer_listingsorder = []
+    listingsorder = []
+    for listing in buyerlistings:
+        if listing.order is not None and listing.order.order_status == "dispatched":
+            listingsorder.append(listing)  # seller details
+            # seller_listingsorder.append(listing.seller.auth_user)  # seller details
+    # for listing in sellerlistings:
+    #     if listing.order.order_status == "dispatched":
+    #         seller_listingsorder.append(listing)  # buyer details
+            # seller_listingsorder.append(listing.order.user)  # buyer details
+
+    #for listing history of all listings = correct
+    mylistings = Listing.objects.all()
+    seller_list = []
+    for listing in mylistings:
+        seller_list.append(listing)  # for seller details
+        # seller_list.append(listing.seller.auth_user)  # for seller details
+
+    context = {
+        'user_count': user_count,
+        'item_count': item_count,
+        'listing_count': listing_count,
+        'order_count': order_count,
+        'site_user': site_user,  # my profile
+        'listingsorder': listingsorder,  # my profile
+        # 'seller_listingsorder': seller_listingsorder,  # sellers in orders
+        # 'buyer_listingsorder': buyer_listingsorder,  # buyers in orders
+        'seller_list': seller_list,  # all listings of sellers
+        'mylistings': mylistings,  # all listings
+    }
+    return render(request, 'admin-dashboard.html', context)
+
+#for user dashboard
+
+
+@login_required
+@csrf_exempt
+def query_user_dashboard(request):
+    #for my cart
+    #match current logged in user to buyers #seems correct
+    listings = Listing.objects.filter(order__user_id=request.user.id)
+    new_listingscart = []
+    cart_not_empty = False
+    cart_id = 0
+    if request.session.get("cart_id", None) is not None:
+        cart_not_empty = True
+        cart_id = request.session["cart_id"]
+        for listing in listings:
+            if listing.order.order_status == "pending in cart":
+               # for seller details where pending in cart
+               new_listingscart.append(listing)
+               # new_listingscart.append(listing.seller.auth_user)
+        for listing in new_listingscart:
+            print(str(listing.id) + ":: " + listing.item.title +
+                  ": " + listing.order.order_status)
+
+    #for my order #seems correct
+    #get the listings for which current user is buyer
+    new_listingsorder = []
+    for listing in listings:
+        if listing.order.order_status == "dispatched":
+           # for seller details where item bought
+            new_listingsorder.append(listing)
+           # new_listingsorder.append(listing.seller.auth_user)
+
+    #for my listing = correct
+    mylistings = Listing.objects.filter(seller__auth_user_id=request.user.id)
+    buyers_list = []
+    for listing in mylistings:
+        buyers_list.append(listing)  # for buyer details
+        # buyers_list.append(listing.order.user)  # for buyer details
+
+    #for my profile = correct
+    site_user = SiteUser.objects.get(auth_user_id=request.user.id)
+    context = {
+        'new_listingscart': new_listingscart,  # my cart
+        'new_listingsorder': new_listingsorder,  # my order
+        'listings': listings,  # my order listing
+        'buyers_list': buyers_list,  # my listing buyers
+        'mylistings': mylistings,  # my listing
+        'site_user': site_user,  # my profile
+        'cart_not_empty': cart_not_empty,
+        "cart_id": cart_id,
+    }
+    return render(request, 'user-dashboard.html', context)
+
+
+# #for my order
+# @login_required
+# @csrf_exempt
+# def query_user_dashboard_order(request):
+#     #get the listings for which current user is buyer
+#     listings = Listings.objects.filter(listing_order_user = request.user.id)
+#     new_listings2 = []
+#     for listing in listings:
+#        if listing.order_status == "dispatched"
+#             new_listings2.append(listing.order)
+#             template = loader.get_template('store/user_dashboard.html')
+#             context = {
+#                 'new_listings2': new_listings2,
+#             }
+#     return HttpResponse(template.render(context, request, status=200))
+
+
+# #for my listing
+# @login_required
+# @csrf_exempt
+# def query_user_dashboard_listing(request):
+#     mylistings = Listings.objects.filter(seller__auth_user_id=request.user.id)
+#     buyers_list = []
+#     for listing in mylistings:
+#         buyers_list.append(listing.order.user)
+
+#for my profile : done
+# @login_required
+# @csrf_exempt
+# def query_user_dashboard(request):
+#     site_user = SiteUser.objects.get(auth_user_id=request.user.id)
+#     template = loader.get_template('store/user_dashboard.html')
+#     context = {
+#         'site_user': site_user,
+#     }
+#     return HttpResponse(template.render(context, request))
+
+# for cart view, adding item to cart
+def get(self, request):
+    self.request.session.set_expiry(0)  # till browser closed
+    cart_id = self.request.session.get(
+        "cartID")  # you can use any name "cartID"
+
+    # if no session exist, create new and save
+    if cart_id == None:
+        cart = Cart()
+        cart.save()
+
+        # save cart_id for first use.
+        cart_id = cart.id  # After this it will save by line 18
+        self.request.session["cartID"] = cart.id  # save session
+
+    # save current cartID into cart,
+    # for displaying cart item in template
+    cart = Cart.objects.get(id=cart_id)
+
+    # if already login, save username in Cart
+    if self.request.user.is_authenticated():
+        cart.user = self.request.user
+        cart.save()
+
+    # ItemID is coming from product detail template
+    # get it to add the item in current session.
+    item_id = request.POST.get("ItemID")
+
+    # save the above book in cart item
+    cart_item = Cart.objects.get(cart=cart)
+    context = {
+        "cart": cart
+    }
+    template = self.template_name
+    return render(request, template, context)
+
+
+########## new code ############
+# but this might work only for that particular session?
+
+
+# get the current user's cart id, sets new one if blank
+import random
+
+CART_ID_SESSION_KEY = 'cart_id'
+
+
+def _cart_id(request):
+    if request.session.get(CART_ID_SESSION_KEY, '') == '':
+        request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
+    return request.session[CART_ID_SESSION_KEY]
+
+
+# generate random cart id
+
+
+def _generate_cart_id():
+    cart_id = ''
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'
+    cart_id_length = 50
+    for y in range(cart_id_length):
+        cart_id += characters[random.randint(0, len(characters) - 1)]
+    return cart_id
+
+
+# return all items from the current user's cart
+
+
+def get_cart_items(request):
+    return Cart.objects.filter(cart_id=_cart_id(request))
+
+
+########## new code ############
+
+
+@login_required
+@csrf_exempt
+def add_to_cart(request):
+    # get the cart_id from all carts by querying for the user's ID --> #above new code
+    # Get the listing id from request
+    if request.method == 'POST':
+        listing_id = request.POST.get("listing_id", None)
+        listing = Listing.objects.get(id=listing_id)
+    # cart_item = Listing.objects.all().filter(order=filters['order'])
+    # item = get_object_or_404(Listing, pk=item_id)
+    # below line fetches the id of the buyer
+    cart = None
+    created = False
+    if request.session.get("cart_id", None) is None:
+        print("Cart not created")
+        cart = Cart.objects.create(
+            user=request.user,
+            quantity=1,
+            addtocart_date_time=datetime.datetime.now()
+        )
+        request.session["cart_id"] = cart.id
+        created = True
+    else:
+        cart = Cart.objects.get(id=request.session["cart_id"])
+    # try:
+    #     cart = Cart.objects.get(user_id=request.user.id)
+    # except Exception:
+    #     cart = Cart.objects.create(
+    #         user=request.user,
+    #         quantity=1,
+    #         addtocart_date_time=datetime.datetime.now()
+    #     )
+    #     created = True
+    if not created:
+        cart.quantity = cart.quantity + 1
+        cart.save()
+    listing.order = cart
+    listing.save()
+    # save cart id to session somehow -->above new code
+    messages.success(request, "Item added to cart")
+    # after buyer adds item to cart by pressing addtocart button on product detail, redirect to buy books page if he wants to add more items
+    return redirect('/store/buy-books/')
+
+
+@csrf_exempt
+@login_required
+def remove_from_cart(request):
+    if request.method == 'POST':
+        listing_id = request.POST.get("listing_id", None)
+        listing = Listing.objects.get(id=listing_id)
+        listing.order = None
+        listing.save()
+        return redirect('/store/user-dashboard/')
+
+
+@csrf_exempt
+@login_required
+def place_order(request):
+    print("=================")
+    print("Place ORder ")
+    if request.method == 'POST':
+        cart_id = request.POST.get("cart_id", None)
+        listings = Listing.objects.filter(order_id=cart_id)
+        for listing in listings:
+            listing.order.order_status = "dispatched"
+            listing.order.save()
+            listing.save()
+        print("========")
+        request.session["cart_id"] = None
+        return redirect('/store/user-dashboard/')
+        # check quantity entered by user in cart
+        # quantity = Cart.objects.all().filter(quantity=filters['quantity'])
+        # if quantity is greater than or equal to 1, set delete_item flag to true then delete it
+        # if quantity >= 1:
+        # delete_item = True
+        # if delete_item:
+        # cart_item.delete()
+        # #disassociates the related objects, clear is available on foreign keys
+        # listing = Listings.objects.get(cart_item)
+        # listing.entry_set.clear()
+        # #otherwise set the correct quantity.
+        # else:
+        # cart_item.quantity = quantity
+        # cart_item.save()
+
+# no need of update cart because every item is a unique listing without quantity specifications per item.

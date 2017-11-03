@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+    <div id="all">
+
+        <header>
+
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Contact us on ########## or ouremailid.com.</p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="login">
+
+                                <a href="/store/logout/"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
+                                <!--redirect href on site homepage-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
+            <!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="index.html">
+                                <img src="" alt="Site logo" class="hidden-xs hidden-sm">
+                                <img src="/static/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Xchange</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="/store/dashboard/" >Dashboard</a>
+                                </li>
+                                 <li>
+                                    <a href="/store/buy-books/" >Buy Items</a>
+                                </li>
+                                <li  class="active">
+                                    <a href="/store/sell-books/" >Sell Items</a>
+                                </li>
+                                <li>
+                                    <a href="/store/test-papers/" >Test Papers</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->
+
+        </header>
+
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Add Items</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Dashboard</a>
+                            </li>
+                            <li>Add Items</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                            <h2 class="text-uppercase">Add New Item</h2>
+                            <hr>
+
+                            <form action="/store/add-new-items/" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="itemtype">Item Type</label>
+                                      <div class="col-md-6>">
+                                        <select class="form-control " id="itemtype" name="itemtype">
+                                          <option value="book">Book</option>
+                                          <option value="equipment">Equipment</option>
+                                          <option value="testpaper">Test Papers</option>
+                                        </select>
+                                      </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="year">Year</label>
+                                      <div class="col-md-6>">
+                                        <select class="form-control " id="year" name="year">
+                                          <option value="fe">FE</option>
+                                          <option value="se">SE</option>
+                                          <option value="te">TE</option>
+                                          <option value="be">BE</option>
+                                        </select>
+                                      </div>
+                                </div>
+                               <div class="form-group">
+                                    <label for="department">Department</label>
+                                      <div class="col-md-6>">
+                                        <select class="form-control " id="department" name="department">
+                                          <option value="COMPS">Computers</option>
+                                          <option value="IT">IT</option>
+                                          <option value="ELEX">Electronics</option>
+                                          <option value="EXTC">EXTC</option>
+                                          <option value="MECH">Mechanical</option>
+                                          <option value="PROD">Production</option>
+                                          <option value="CIVIL">Civil</option>
+                                          <option value="BIO">Biomedical</option>
+                                        </select>
+                                      </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Max Price</label>
+                                    <input type="text" class="form-control" id="maxprice" name="maxprice" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                             <h2 class="text-uppercase">&nbsp;</h2>
+                            <hr>
+                            <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="author">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="publisher">Publisher</label>
+                                    <input type="text" class="form-control" id="publisher" name="publisher" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="publisher">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tel-login">Cover Page</label>
+                                    <input type='file' name="image" value="Upload"/>
+                                    <!-- onchange="readURL(this);" -->
+                                    <img id="image" src="#" alt="Image chosen"/>
+                                </div>
+                             </div>
+                                <div class="text-center">
+                                    <button type="submit" id="buttonid" class="btn btn-template-main" style="margin-bottom:15px;"><i class="fa fa-user-md"></i> Submit</button>
+                                </div>
+                            </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Miloni Anushka Anant</p>
+                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+    {% include 'scripts.html' %}
+
+
+<script type="text/javascript">
+$('select').select2();
+$(document).ready(function() {
+  $(".js-example-basic-single").select2();
+});
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+ 
+</body>
+
+</html>
