@@ -1,5 +1,5 @@
 # AAM-Book-Exchange
-HTML, CSS, JS, Jquery, Bootstrap, Python, Django
+HTML, CSS, JS, Jquery, Bootstrap, Python, Django, Postgres
 
 AAM Book Exchange is a community for exchanging used college books and equipments. Software also includes test preparation material such as test papers and frequently asked previous year questions. This software allows the users to manage the inventory of the system with the CRUD functionality,i.e create, retrieve, update, delete.
 
