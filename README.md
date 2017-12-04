@@ -21,11 +21,13 @@ Steps after cloning this repository:
 //Create a virtual environment and install dependencies. 
 
 mkvirtualenv this_project
+
 pip install -r requirements.txt
 
 //Initialise database after configuring it.
 
 python ./manage.py syncdb 
+
 python ./manage.py migrate 
 
 //Run the development server.
